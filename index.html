@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Card — Glassmorphism</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <article data-testid="test-profile-card">
+      <header>
+        <figure>
+          <img
+            data-testid="test-user-avatar"
+            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop"
+            alt="Alex Morgan - Full Stack Developer"
+          />
+        </figure>
+        <h2 data-testid="test-user-name">Alex Morgan</h2>
+        <p data-testid="test-user-bio">
+          Full-stack developer passionate about creating beautiful, accessible
+          web experiences. I love exploring new technologies and building
+          products that make a difference.
+        </p>
+      </header>
+
+      <div class="time-container">
+        <div class="time-label">Current Timestamp</div>
+        <span data-testid="test-user-time" id="timeDisplay"></span>
+      </div>
+
+      <nav
+        data-testid="test-user-social-links"
+        aria-label="Social media links"
+      >
+        <a
+          href="https://twitter.com/alexmorgan"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="test-user-social-twitter"
+          aria-label="Twitter"
+        >
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a
+          href="https://linkedin.com/in/alexmorgan"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="test-user-social-linkedin"
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a
+          href="https://github.com/alexmorgan"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="test-user-social-github"
+          aria-label="GitHub"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      </nav>
+
+      <section>
+        <h3><i class="fas fa-heart"></i> Hobbies</h3>
+        <ul data-testid="test-user-hobbies">
+          <li>Building side projects</li>
+          <li>Photography and video editing</li>
+          <li>Hiking and exploring nature</li>
+          <li>Playing guitar</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3><i class="fas fa-ban"></i> Dislikes</h3>
+        <ul data-testid="test-user-dislikes">
+          <li>Unnecessary meetings</li>
+          <li>Traffic jams</li>
+          <li>Cold coffee</li>
+          <li>Spaghetti code</li>
+        </ul>
+      </section>
+    </article>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
