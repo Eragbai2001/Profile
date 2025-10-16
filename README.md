@@ -31,7 +31,7 @@ This project showcases fundamental frontend development skills such as responsiv
 
 
 ```markdown
-![Profile Card Screenshot](./screenshot.png)
+![Profile Card Screenshot](https://raw.githubusercontent.com/Eragbai2001/Profile/main/screenshot.png)
 
 ## 📂 Project Structure
 
