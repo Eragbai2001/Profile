@@ -36,6 +36,7 @@ This project showcases fundamental frontend development skills such as responsiv
 
 ## 📂 Project Structure
 
+```
 Profile/
 │
 ├── index.html          # Main HTML file
@@ -44,8 +45,7 @@ Profile/
 ├── public/             # (Optional) extra assets like fonts, icons, or images
 ├── README.md           # Documentation file
 └── test.md             # Notes or testing information
-
-
+```
 
 ---
 
