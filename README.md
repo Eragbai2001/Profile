@@ -30,7 +30,8 @@ This project showcases fundamental frontend development skills such as responsiv
 
 
 
-
+```markdown
+![Profile Card Screenshot](./screenshot.png)
 
 ## 📂 Project Structure
 
