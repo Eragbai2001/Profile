@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Me - Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #1e40af;
+        --slate-50: #f8fafc;
+        --slate-100: #f1f5f9;
+        --slate-200: #e2e8f0;
+        --slate-600: #475569;
+        --slate-700: #334155;
+        --slate-900: #0f172a;
+        --white: #ffffff;
+        --red-500: #ef4444;
+        --red-600: #dc2626;
+        --green-600: #16a34a;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--slate-50) 0%,
+          #f0f9ff 50%,
+          var(--slate-100) 100%
+        );
+        color: var(--slate-900);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Main Content */
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1rem;
+      }
+
+      .contact-container {
+        width: 100%;
+        max-width: 28rem;
+      }
+
+      .contact-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .contact-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: var(--slate-900);
+      }
+
+      .contact-header p {
+        font-size: 1.125rem;
+        color: var(--slate-600);
+        line-height: 1.6;
+      }
+
+      /* Glassmorphism Card */
+      .form-card {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      @media (min-width: 768px) {
+        .form-card {
+          padding: 2.5rem;
+        }
+      }
+
+      /* Form */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      /* Messages */
+      .message {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .message.success {
+        background: #dcfce7;
+        border: 1px solid #86efac;
+      }
+
+      .message.error {
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+      }
+
+      .message-icon {
+        flex-shrink: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-top: 0.125rem;
+      }
+
+      .message.success .message-icon {
+        color: var(--green-600);
+      }
+
+      .message.error .message-icon {
+        color: var(--red-600);
+      }
+
+      .message-content h3 {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        font-size: 0.95rem;
+      }
+
+      .message.success h3 {
+        color: #166534;
+      }
+
+      .message.error h3 {
+        color: #991b1b;
+      }
+
+      .message-content p {
+        font-size: 0.875rem;
+      }
+
+      .message.success p {
+        color: #15803d;
+      }
+
+      .message.error p {
+        color: #7f1d1d;
+      }
+
+      /* Form Group */
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--slate-900);
+        margin-bottom: 0.5rem;
+      }
+
+      .required {
+        color: var(--red-500);
+      }
+
+      input,
+      textarea {
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--slate-200);
+        border-radius: 0.5rem;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background: white;
+      }
+
+      input.error,
+      textarea.error {
+        border-color: var(--red-500);
+        background: #fef2f2;
+      }
+
+      input.error:focus,
+      textarea.error:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      }
+
+      textarea {
+        resize: none;
+        min-height: 7.5rem;
+        font-family: inherit;
+      }
+
+      /* Error Message */
+      .error-message {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--red-600);
+      }
+
+      .error-icon {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+
+      /* Submit Button */
+      button[type="submit"] {
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(to right, var(--primary), #2563eb);
+        color: white;
+        font-weight: 600;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-height: 2.75rem;
+      }
+
+      button[type="submit"]:hover:not(:disabled) {
+        background: linear-gradient(to right, var(--primary-dark), #1d4ed8);
+        box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+      }
+
+      button[type="submit"]:active:not(:disabled) {
+        transform: scale(0.98);
+      }
+
+      button[type="submit"]:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .spinner {
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Required Note */
+      .required-note {
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--slate-600);
+        margin-top: 0.5rem;
+      }
+
+      /* Footer */
+      footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+      }
+
+      .footer-content {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+        }
+      }
+
+      .footer-section h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--slate-900);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 1rem;
+      }
+
+      .footer-section a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--slate-700);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section a:hover {
+        color: var(--primary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .social-btn {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.75rem;
+        background: white;
+        color: var(--slate-700);
+        border: 2px solid var(--slate-200);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--primary), #2563eb);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+      }
+
+      .social-btn svg {
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s ease;
+      }
+
+      .social-btn:hover {
+        transform: translateY(-4px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+      }
+
+      .social-btn:hover::before {
+        opacity: 1;
+      }
+
+      .social-btn:hover svg {
+        color: white;
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .social-btn:active {
+        transform: translateY(-2px);
+      }
+
+      .footer-divider {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--slate-600);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        main {
+          padding: 2rem 1rem;
+        }
+
+        .form-card {
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      style="
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem 0;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      ">
+      <a
+        href="index.html"
+        style="
+          color: var(--slate-700);
+          font-weight: 600;
+          text-decoration: none;
+          transition: color 0.2s ease;
+          padding: 0.5rem 1rem;
+          border-bottom: 2px solid transparent;
+        "
+        >Home</a
+      >
+      <a
+        href="about.html"
+        style="
+          color: var(--slate-700);
+          font-weight: 600;
+          text-decoration: none;
+          transition: color 0.2s ease;
+          padding: 0.5rem 1rem;
+          border-bottom: 2px solid transparent;
+        "
+        >About Me</a
+      >
+      <a
+        href="contact.html"
+        style="
+          color: var(--slate-700);
+          font-weight: 600;
+          text-decoration: none;
+          transition: color 0.2s ease;
+          padding: 0.5rem 1rem;
+          border-bottom: 2px solid var(--primary); /* Active underline */
+        "
+        >Contact</a
+      >
+    </nav>
+
+    <main>
+      <div class="contact-container">
+        <div class="contact-header">
+          <h1>Get in Touch</h1>
+          <p>
+            I'd love to hear from you. Send me a message and I'll respond as
+            soon as possible.
+          </p>
+        </div>
+
+        <div class="form-card">
+          <form id="contactForm">
+            <div id="messageContainer"></div>
+
+            <div class="form-group">
+              <label for="fullName">
+                Full Name <span class="required">*</span>
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="John Doe"
+                aria-invalid="false"
+                aria-describedby="fullName-error"
+                data-testid="test-contact-name" />
+              <div
+                class="error-message"
+                id="fullName-error"
+                style="display: none"
+                data-testid="test-contact-error-name">
+                <svg class="error-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span id="fullName-error-text"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email"> Email <span class="required">*</span> </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="john@example.com"
+                aria-invalid="false"
+                aria-describedby="email-error"
+                data-testid="test-contact-email" />
+              <div
+                class="error-message"
+                id="email-error"
+                style="display: none"
+                data-testid="test-contact-error-email">
+                <svg class="error-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span id="email-error-text"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">
+                Subject <span class="required">*</span>
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Project Inquiry"
+                aria-invalid="false"
+                aria-describedby="subject-error"
+                data-testid="test-contact-subject" />
+              <div
+                class="error-message"
+                id="subject-error"
+                style="display: none"
+                data-testid="test-contact-error-subject">
+                <svg class="error-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span id="subject-error-text"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">
+                Message <span class="required">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me about your project..."
+                aria-invalid="false"
+                aria-describedby="message-error"
+                data-testid="test-contact-message"></textarea>
+              <div
+                class="error-message"
+                id="message-error"
+                style="display: none"
+                data-testid="test-contact-error-message">
+                <svg class="error-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span id="message-error-text"></span>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              id="submitBtn"
+              data-testid="test-contact-submit">
+              Send Message
+            </button>
+
+            <p class="required-note">
+              <span class="required">*</span> Required fields
+            </p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>Contact Info</h3>
+            <a href="mailto:hello@example.com">
+              <svg
+                width="18"
+                height="18"
+                fill="currentColor"
+                viewBox="0 0 20 20">
+                <path
+                  d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path
+                  d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+              <span>hello@example.com</span>
+            </a>
+          </div>
+
+          <div class="footer-section">
+            <h3>Follow</h3>
+            <div class="social-links">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn"
+                aria-label="GitHub">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.603-3.369-1.343-3.369-1.343-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.544 2.914 1.186.092-.923.35-1.544.636-1.9-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.817c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.137 18.194 20 14.44 20 10.017 20 4.484 15.522 0 10 0z"
+                    clip-rule="evenodd" />
+                </svg>
+              </a>
+
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn"
+                aria-label="Twitter">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  viewBox="0 0 20 20">
+                  <path
+                    d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-divider">
+          <p>&copy; 2025 Your Name. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const form = document.getElementById("contactForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const messageContainer = document.getElementById("messageContainer");
+
+      const fields = ["fullName", "email", "subject", "message"];
+      const formData = {};
+
+      // Initialize form data
+      fields.forEach((field) => {
+        formData[field] = "";
+      });
+
+      // Clear error on input
+      fields.forEach((field) => {
+        const input = document.getElementById(field);
+        input.addEventListener("input", () => {
+          if (formData[field]) {
+            clearError(field);
+          }
+          formData[field] = input.value;
+        });
+      });
+
+      // Validate form
+      function validateForm() {
+        const errors = {};
+
+        if (!formData.fullName.trim()) {
+          errors.fullName = "Full name is required";
+        }
+
+        if (!formData.email.trim()) {
+          errors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          errors.email = "Please enter a valid email address";
+        }
+
+        if (!formData.subject.trim()) {
+          errors.subject = "Subject is required";
+        }
+
+        if (!formData.message.trim()) {
+          errors.message = "Message is required";
+        } else if (formData.message.trim().length < 10) {
+          errors.message = "Message must be at least 10 characters";
+        }
+
+        return errors;
+      }
+
+      // Show error
+      function showError(field, message) {
+        const input = document.getElementById(field);
+        const errorEl = document.getElementById(`${field}-error`);
+        const errorText = document.getElementById(`${field}-error-text`);
+
+        input.classList.add("error");
+        input.setAttribute("aria-invalid", "true");
+        errorEl.style.display = "flex";
+        errorText.textContent = message;
+      }
+
+      // Clear error
+      function clearError(field) {
+        const input = document.getElementById(field);
+        const errorEl = document.getElementById(`${field}-error`);
+
+        input.classList.remove("error");
+        input.setAttribute("aria-invalid", "false");
+        errorEl.style.display = "none";
+      }
+
+      // Show message
+      function showMessage(type, title, text) {
+        const messageEl = document.createElement("div");
+        messageEl.className = `message ${type}`;
+        if (type === "success") {
+          messageEl.setAttribute("data-testid", "test-contact-success");
+        }
+        messageEl.innerHTML = `
+                <svg class="message-icon" fill="currentColor" viewBox="0 0 20 20">
+                    ${
+                      type === "success"
+                        ? '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>'
+                        : '<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>'
+                    }
+                </svg>
+                <div class="message-content">
+                    <h3>${title}</h3>
+                    <p>${text}</p>
+                </div>
+            `;
+        messageContainer.innerHTML = "";
+        messageContainer.appendChild(messageEl);
+      }
+
+      // Handle submit
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Clear previous messages
+        messageContainer.innerHTML = "";
+
+        // Validate
+        const errors = validateForm();
+        if (Object.keys(errors).length > 0) {
+          Object.entries(errors).forEach(([field, message]) => {
+            showError(field, message);
+          });
+          return;
+        }
+
+        // Clear errors
+        fields.forEach((field) => clearError(field));
+
+        // Submit
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<div class="spinner"></div> Sending...';
+
+        try {
+          // Simulate API call
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          console.log("Form submitted:", formData);
+
+          showMessage(
+            "success",
+            "Message sent successfully!",
+            "I'll get back to you soon."
+          );
+
+          // Reset form
+          form.reset();
+          fields.forEach((field) => {
+            formData[field] = "";
+          });
+
+          // Reset button
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send Message";
+          }, 1000);
+
+          // Clear message after 5 seconds
+          setTimeout(() => {
+            messageContainer.innerHTML = "";
+          }, 5000);
+        } catch (error) {
+          showMessage(
+            "error",
+            "Something went wrong",
+            "Please try again later."
+          );
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send Message";
+          console.error("Form submission error:", error);
+        }
+      });
+    </script>
+  </body>
+</html>

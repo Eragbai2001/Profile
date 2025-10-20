@@ -6,24 +6,41 @@
     <title>Profile Card — Glassmorphism</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <!-- Navigation Bar -->
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="nav-container">
+        <a
+          href="index.html"
+          class="nav-link active"
+          aria-current="page"
+          title="Home">
+          <i class="fas fa-home"></i>
+        </a>
+        <a href="about.html" class="nav-link" title="About Me">
+          <i class="fas fa-user"></i>
+        </a>
+        <a href="contact.html" class="nav-link" title="Contact">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </nav>
+
     <article data-testid="test-profile-card">
       <header>
         <figure>
           <img
             data-testid="test-user-avatar"
             src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop"
-            alt="Alex Morgan - Full Stack Developer"
-          />
+            alt="Alex Morgan - Full Stack Developer" />
         </figure>
         <h2 data-testid="test-user-name">Alex Morgan</h2>
         <p data-testid="test-user-bio">
           Full-stack developer passionate about creating beautiful, accessible
-          web experiences. I love exploring new technologies and building
+          web experiences. sssslI love exploring new technologies and building
           products that make a difference.
         </p>
       </header>
@@ -33,17 +50,13 @@
         <span data-testid="test-user-time" id="timeDisplay"></span>
       </div>
 
-      <nav
-        data-testid="test-user-social-links"
-        aria-label="Social media links"
-      >
+      <nav data-testid="test-user-social-links" aria-label="Social media links">
         <a
           href="https://twitter.com/alexmorgan"
           target="_blank"
           rel="noopener noreferrer"
           data-testid="test-user-social-twitter"
-          aria-label="Twitter"
-        >
+          aria-label="Twitter">
           <i class="fab fa-twitter"></i>
         </a>
         <a
@@ -51,8 +64,7 @@
           target="_blank"
           rel="noopener noreferrer"
           data-testid="test-user-social-linkedin"
-          aria-label="LinkedIn"
-        >
+          aria-label="LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
         <a
@@ -60,8 +72,7 @@
           target="_blank"
           rel="noopener noreferrer"
           data-testid="test-user-social-github"
-          aria-label="GitHub"
-        >
+          aria-label="GitHub">
           <i class="fab fa-github"></i>
         </a>
       </nav>

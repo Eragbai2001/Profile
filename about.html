@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me - Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #1e40af;
+        --secondary: #8b5cf6;
+        --accent-pink: #ec4899;
+        --accent-orange: #f97316;
+        --accent-amber: #f59e0b;
+        --slate-50: #f8fafc;
+        --slate-100: #f1f5f9;
+        --slate-200: #e2e8f0;
+        --slate-600: #475569;
+        --slate-700: #334155;
+        --slate-900: #0f172a;
+        --white: #ffffff;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(
+          to bottom,
+          var(--slate-50),
+          white,
+          var(--slate-50)
+        );
+        color: var(--slate-900);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Animated Background */
+      .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: float 20s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-20px) translateX(10px);
+        }
+      }
+
+      /* Header */
+      header {
+        position: relative;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+      }
+
+      .header-content {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+      }
+
+      header h1 {
+        font-size: clamp(1.875rem, 5vw, 2.25rem);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        color: var(--slate-600);
+        font-size: 1rem;
+      }
+
+      /* Main Content */
+      main {
+        position: relative;
+        z-index: 10;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+      }
+
+      /* Sections */
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+      }
+
+      @media (min-width: 768px) {
+        .sections {
+          gap: 8rem;
+        }
+      }
+
+      section {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition: all 0.7s ease;
+      }
+
+      section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section-card {
+        position: relative;
+        border-radius: 1rem;
+        padding: 2rem;
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+      }
+
+      @media (min-width: 768px) {
+        .section-card {
+          padding: 3rem;
+        }
+      }
+
+      .section-card:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        transform: scale(1.02);
+      }
+
+      .section-header {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        align-items: flex-start;
+      }
+
+      .section-icon {
+        font-size: 2.5rem;
+        transition: transform 0.5s ease;
+        flex-shrink: 0;
+      }
+
+      .section-card:hover .section-icon {
+        transform: scale(1.1) rotate(12deg);
+      }
+
+      @media (min-width: 768px) {
+        .section-icon {
+          font-size: 3rem;
+        }
+      }
+
+      .section-title-group {
+        flex: 1;
+      }
+
+      .section-subtitle {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-title {
+        font-size: clamp(1.875rem, 4vw, 2.25rem);
+        font-weight: 700;
+        color: var(--slate-900);
+        transition: color 0.3s ease;
+      }
+
+      .section-card:hover .section-title {
+        color: var(--primary);
+      }
+
+      .section-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .section-content p {
+        font-size: 1.125rem;
+        color: var(--slate-700);
+        line-height: 1.8;
+      }
+
+      .section-content ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .section-content li {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .list-dot {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #dbeafe, #cffafe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .section-content li:hover .list-dot {
+        background: linear-gradient(135deg, #bfdbfe, #a5f3fc);
+      }
+
+      .list-dot::after {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: var(--primary);
+      }
+
+      .section-content li span {
+        font-size: 1.125rem;
+        color: var(--slate-700);
+        line-height: 1.8;
+        transition: color 0.3s ease;
+      }
+
+      .section-content li:hover span {
+        color: var(--slate-900);
+      }
+
+      /* Section Divider */
+      .section-divider {
+        margin-top: 3rem;
+        margin-bottom: 0;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .divider-line {
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--slate-200),
+          transparent
+        );
+      }
+
+      .divider-dots {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      .dot:nth-child(1) {
+        background: #60a5fa;
+        animation-delay: 0s;
+      }
+
+      .dot:nth-child(2) {
+        background: #a78bfa;
+        animation-delay: 0.2s;
+      }
+
+      .dot:nth-child(3) {
+        background: #f472b6;
+        animation-delay: 0.4s;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Footer */
+      footer {
+        border-top: 1px solid rgba(226, 232, 240, 0.5);
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+        margin-top: 5rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .footer-content {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+
+      .footer-content p {
+        color: var(--slate-600);
+        margin-bottom: 1rem;
+      }
+
+      .footer-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: var(--primary);
+        color: white;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .footer-btn:hover {
+        background: var(--primary-dark);
+        box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+      }
+
+      /* Color Variants */
+      .bg-blue {
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      }
+      .bg-purple {
+        background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+      }
+      .bg-amber {
+        background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      }
+      .bg-rose {
+        background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+      }
+      .bg-indigo {
+        background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 2rem 1rem;
+        }
+
+        .sections {
+          gap: 3rem;
+        }
+
+        .section-nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      style="
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem 0;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      ">
+      <a
+        href="index.html"
+        style="
+          color: var(--slate-700);
+          font-weight: 600;
+          text-decoration: none;
+          transition: color 0.2s ease;
+          padding: 0.5rem 1rem;
+          border-bottom: 2px solid transparent;
+        "
+        >Home</a
+      >
+      <a
+        href="about.html"
+        style="
+          color: var(--primary);
+          font-weight: 600;
+          text-decoration: none;
+          transition: color 0.2s ease;
+          padding: 0.5rem 1rem;
+          border-bottom: 2px solid var(--primary);
+        "
+        >About Me</a
+      >
+      <a
+        href="contact.html"
+        style="
+          color: var(--slate-700);
+          font-weight: 600;
+          text-decoration: none;
+          transition: color 0.2s ease;
+          padding: 0.5rem 1rem;
+          border-bottom: 2px solid transparent;
+        "
+        >Contact</a
+      >
+    </nav>
+
+    <div class="animated-bg" id="animatedBg"></div>
+
+    <header>
+      <div class="header-content">
+        <h1>Hi, I am Josiah Aideloje</h1>
+        <p>A reflective journey through my goals, growth, and aspirations</p>
+      </div>
+    </header>
+
+    <main data-testid="test-about-page">
+      <div class="container">
+        <div class="sections" id="sections"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p>Thanks for taking the time to learn about me!</p>
+        <a href="contact.html" class="footer-btn">Get in Touch</a>
+      </div>
+    </footer>
+
+    <script>
+      // Section Data
+      const sections = [
+        {
+          id: "bio",
+          title: "About Me",
+          subtitle: "Bio",
+          icon: "👋",
+          bgClass: "bg-blue",
+          testId: "test-about-bio",
+          content: `I'm a passionate full-stack developer with a love for creating beautiful, accessible digital experiences. With over 5 years of experience in web development, I've worked with startups and established companies to build products that make a real impact.
+
+My journey in tech started with a curiosity about how things work. Today, I'm driven by the challenge of solving complex problems and mentoring others in the community.`,
+          isList: false,
+          hasImage: true,
+        },
+        {
+          id: "goals",
+          title: "Program Goals",
+          subtitle: "What I Aim to Achieve",
+          icon: "🎯",
+          bgClass: "bg-purple",
+          testId: "test-about-goals",
+          content: [
+            "Master advanced React patterns and performance optimization",
+            "Build a portfolio of impactful open-source projects",
+            "Develop expertise in full-stack development with modern tools",
+            "Contribute meaningfully to the developer community",
+            "Create educational content to help others learn",
+          ],
+          isList: true,
+        },
+        {
+          id: "confidence",
+          title: "Areas of Low Confidence",
+          subtitle: "Where I Want to Grow",
+          icon: "🌱",
+          bgClass: "bg-amber",
+          testId: "test-about-confidence",
+          content: [
+            "DevOps and infrastructure management - I want to deepen my understanding of deployment pipelines and cloud architecture",
+            "Mobile development - While I have some experience, I want to become more proficient with React Native",
+            "System design at scale - Designing systems that handle millions of users is an area I want to master",
+            "Advanced database optimization - Query optimization and database architecture for large-scale applications",
+          ],
+          isList: true,
+        },
+        {
+          id: "future",
+          title: "Note to Future Self",
+          subtitle: "A Message for Tomorrow",
+          icon: "💭",
+          bgClass: "bg-rose",
+          testId: "test-about-future-note",
+          content: `Remember why you started. The journey of learning never ends, and that's what makes it beautiful. Don't compare your beginning to someone else's middle. Celebrate small wins, learn from failures, and always stay curious.
+
+Keep building. Keep shipping. Keep growing. The best time to plant a tree was 20 years ago, but the second best time is now. Your future self will thank you for the effort you put in today.`,
+          isList: false,
+        },
+        {
+          id: "thoughts",
+          title: "Extra Thoughts",
+          subtitle: "Random Musings",
+          icon: "✨",
+          bgClass: "bg-indigo",
+          testId: "test-about-extra",
+          content: [
+            "Code is poetry - it should be readable, maintainable, and beautiful",
+            "Accessibility is not a feature, it's a responsibility",
+            "The best code is the code that solves real problems for real people",
+            "Community over competition - we grow faster together",
+            "Continuous learning is the only constant in tech",
+          ],
+          isList: true,
+        },
+      ];
+
+      // Initialize animated background
+      function initAnimatedBackground() {
+        const bg = document.getElementById("animatedBg");
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement("div");
+          particle.className = "particle";
+          particle.style.left = Math.random() * 100 + "%";
+          particle.style.top = Math.random() * 100 + "%";
+          particle.style.animationDelay = Math.random() * 20 + "s";
+          particle.style.animationDuration = 15 + Math.random() * 10 + "s";
+          bg.appendChild(particle);
+        }
+      }
+
+      // Render sections
+      function renderSections() {
+        const container = document.getElementById("sections");
+        sections.forEach((section, index) => {
+          const sectionEl = document.createElement("section");
+          sectionEl.id = section.id;
+          sectionEl.setAttribute("data-index", index);
+          if (section.testId) {
+            sectionEl.setAttribute("data-testid", section.testId);
+          }
+
+          let contentHTML = "";
+          if (section.isList) {
+            contentHTML = `<ul>${section.content
+              .map(
+                (item) => `
+                        <li>
+                            <div class="list-dot"></div>
+                            <span>${item}</span>
+                        </li>
+                    `
+              )
+              .join("")}</ul>`;
+          } else {
+            contentHTML = section.content
+              .split("\n\n")
+              .map((para) => `<p>${para}</p>`)
+              .join("");
+          }
+
+          // Add profile image for bio section
+          let imageHTML = "";
+          if (section.hasImage) {
+            imageHTML = `
+              <div style="text-align: center; margin-bottom: 1.5rem;">
+                <img 
+                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" 
+                  alt="Josiah Aideloje - Profile Picture" 
+                  style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);"
+                />
+              </div>
+            `;
+          }
+
+          sectionEl.innerHTML = `
+                    <div class="section-card ${section.bgClass}">
+                        <div class="section-header">
+                            <div class="section-icon">${section.icon}</div>
+                            <div class="section-title-group">
+                                <div class="section-subtitle">${
+                                  section.subtitle
+                                }</div>
+                                <h2 class="section-title">${section.title}</h2>
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            ${imageHTML}
+                            ${contentHTML}
+                        </div>
+                    </div>
+                    ${
+                      index !== sections.length - 1
+                        ? `
+                        <div class="section-divider">
+                            <div class="divider-line"></div>
+                            <div class="divider-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    `
+                        : ""
+                    }
+                `;
+
+          container.appendChild(sectionEl);
+        });
+      }
+
+      // Intersection Observer for animations
+      function initIntersectionObserver() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          {
+            threshold: [0.1, 0.3],
+            rootMargin: "0px 0px -100px 0px",
+          }
+        );
+
+        document.querySelectorAll("section").forEach((el) => {
+          observer.observe(el);
+        });
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        initAnimatedBackground();
+        renderSections();
+        initIntersectionObserver();
+      });
+    </script>
+  </body>
+</html>
