@@ -1,8 +1,15 @@
 const timeElement = document.getElementById("timeDisplay");
 
 function updateTime() {
-  // Use Date.now() for milliseconds timestamp
-  timeElement.textContent = Date.now();
+  // Display a human-readable locale timestamp so tests can validate content
+  try {
+    const now = new Date();
+    // e.g. "2025-10-20 14:23:11"
+    timeElement.textContent = now.toLocaleString();
+  } catch (e) {
+    // Fallback to epoch milliseconds
+    timeElement.textContent = Date.now();
+  }
 }
 
 updateTime();
